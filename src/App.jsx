@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import MovieModel from "./MovieModel";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { FormControl } from "react-bootstrap";
+import CartProvider from "./cartContext";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=b523068f06b70a547946c560d618e2ac";
@@ -42,24 +41,34 @@ function App() {
   };
 
   return (
-    <div className="containeru">
-      <form onSubmit={searchMovie}>
-        <input
-          className="searchBar"
-          type="search"
-          placeholder="Movie Search"
-          name="query"
-          value={query}
-          onChange={changeHandler}
-        />
-        <button type="submit">Search</button>
-      </form>
-      <div className="grid">
-        {movies.map((movieReq) => (
-          <MovieModel key={movieReq.id} {...movieReq} />
-        ))}
+    <CartProvider>
+      <div>
+        {movies.length > 0 ? (
+          <div className="containeru">
+            <form onSubmit={searchMovie}>
+              <input
+                className="searchBar"
+                type="search"
+                placeholder="Movie Search"
+                name="query"
+                value={query}
+                onChange={changeHandler}
+              />
+              <button className="searchButton" type="submit">
+                Search
+              </button>
+            </form>
+            <div className="grid">
+              {movies.map((movieReq) => (
+                <MovieModel key={movieReq.id} {...movieReq} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <h2>No Movies Found</h2>
+        )}
       </div>
-    </div>
+    </CartProvider>
   );
 }
 
