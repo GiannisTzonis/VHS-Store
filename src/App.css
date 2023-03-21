@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,29 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+/* body {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+  background-color: rgb(8, 46, 95);
 }
+
+* {
+  color: rgb(85, 26, 26);
+} */
+
+/* .movieBox {
+  position: relative;
+  width: 25%;
+  height: 300px;
+  padding: 5px;
+  float: left;
+}
+
+.movieBox > img {
+  position: absolute;
+} */
