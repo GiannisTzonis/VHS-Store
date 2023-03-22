@@ -16,9 +16,15 @@ const MovieModel = ({ title, poster_path }) => {
 
   return (
     <div className="box">
-      <button type="button" onClick={() => cart.addOneToCart(product.title)}>
-        Add
-      </button>
+      {productQuantity > 0 ? (
+        <button onClick={() => cart.deleteFromCart(product.title)}>
+          Remove
+        </button>
+      ) : (
+        <button type="button" onClick={() => cart.addOneToCart(product.title)}>
+          Add
+        </button>
+      )}
       <h1>{title}</h1>
       <img src={API_IMG + poster_path}></img>
     </div>
