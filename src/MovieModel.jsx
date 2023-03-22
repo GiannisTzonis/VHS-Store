@@ -6,9 +6,9 @@ import { useContext } from "react";
 
 const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
-const MovieModel = ({ title, poster_path }) => {
+const MovieModel = ({ title, poster_path, id }) => {
   //
-  const product = { title, poster_path };
+  const product = { title, poster_path, id };
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.title);
   // console.log(cart.items);
@@ -20,7 +20,7 @@ const MovieModel = ({ title, poster_path }) => {
         <button
           onClick={() => {
             console.log(title, "was removed from the cart");
-            cart.deleteFromCart(product.title);
+            cart.deleteFromCart(product.title, product.id);
           }}
         >
           Remove
@@ -30,7 +30,7 @@ const MovieModel = ({ title, poster_path }) => {
           type="button"
           onClick={() => {
             console.log(title, "was added to the cart");
-            cart.addOneToCart(product.title);
+            cart.addOneToCart(product.title, product.id);
           }}
         >
           Add

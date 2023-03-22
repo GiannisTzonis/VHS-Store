@@ -23,7 +23,7 @@ export function CartProvider({ children }) {
     return quantity;
   }
 
-  function addOneToCart(title) {
+  function addOneToCart(title, id) {
     const quantity = getProductQuantity(title);
 
     if (quantity === 0) {
@@ -32,6 +32,7 @@ export function CartProvider({ children }) {
         {
           title: title,
           quantity: 1,
+          id: id,
         },
       ]);
     } else {

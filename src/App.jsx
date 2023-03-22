@@ -3,25 +3,23 @@ import "./App.css";
 import MovieModel from "./MovieModel";
 import CartProvider from "./cartContext";
 import CartModel from "./CartModel";
-// import CartModel from "./CartModel";
+// import CartProduct from "./cartProduct";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=b523068f06b70a547946c560d618e2ac";
 const API_SEARCH =
   "https://api.themoviedb.org/3/search/movie?api_key=b523068f06b70a547946c560d618e2ac&query";
 
-// const cart = useContext(CartContext);
-// const productsCount = cart.items;
-
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setMovies(data.results);
       });
   }, []);
@@ -30,14 +28,20 @@ function App() {
     x.preventDefault();
     console.log("Searching");
 
+    setLoading(true);
+
     try {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=b523068f06b70a547946c560d618e2ac&query=${query}`;
+
       const res = await fetch(url);
       const data = await res.json();
       // console.log(data);
       setMovies(data.results);
     } catch (error) {
       console.log(Error);
+    } finally {
+      console.log("error");
+      setLoading(false);
     }
   };
 
@@ -47,35 +51,39 @@ function App() {
 
   return (
     <CartProvider>
-      <div>
-        {movies.length > 0 ? (
-          <div className="containeru">
-            <form onSubmit={searchMovie}>
-              <input
-                className="searchBar"
-                type="search"
-                placeholder="Movie Search"
-                name="query"
-                value={query}
-                onChange={changeHandler}
-              />
-              <button className="searchButton" type="submit">
-                Search
-              </button>
-            </form>
+      {loading ? (
+        <>Loading...</>
+      ) : (
+        <div>
+          {movies.length > 0 ? (
+            <div className="containeru">
+              <form onSubmit={searchMovie}>
+                <input
+                  className="searchBar"
+                  type="search"
+                  placeholder="Movie Search"
+                  name="query"
+                  value={query}
+                  onChange={changeHandler}
+                />
+                <button className="searchButton" type="submit">
+                  Search
+                </button>
+              </form>
 
-            <CartModel></CartModel>
+              <CartModel></CartModel>
 
-            <div className="grid">
-              {movies.map((movieReq) => (
-                <MovieModel key={movieReq.id} {...movieReq} />
-              ))}
+              <div className="grid">
+                {movies.map((movieReq) => (
+                  <MovieModel key={movieReq.id} {...movieReq} />
+                ))}
+              </div>
             </div>
-          </div>
-        ) : (
-          <h2>No Movies Found</h2>
-        )}
-      </div>
+          ) : (
+            <h2>No Movies Found</h2>
+          )}
+        </div>
+      )}
     </CartProvider>
   );
 }
