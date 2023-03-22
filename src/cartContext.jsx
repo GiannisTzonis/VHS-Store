@@ -12,9 +12,9 @@ export const CartContext = createContext({
 export function CartProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
 
-  function getProductQuantity(id) {
+  function getProductQuantity(title) {
     const quantity = cartProducts.find(
-      (product) => product.id === id
+      (product) => product.title === title
     )?.quantity;
 
     if (quantity === undefined) {
@@ -23,21 +23,21 @@ export function CartProvider({ children }) {
     return quantity;
   }
 
-  function addOneToCart(id) {
-    const quantity = getProductQuantity(id);
+  function addOneToCart(title) {
+    const quantity = getProductQuantity(title);
 
     if (quantity === 0) {
       setCartProducts([
         ...cartProducts,
         {
-          id: id,
+          title: title,
           quantity: 1,
         },
       ]);
     } else {
       setCartProducts(
         cartProducts.map((product) =>
-          product.id === id
+          product.title === title
             ? { ...product, quantity: product.quantity + 1 }
             : product
         )
@@ -45,16 +45,16 @@ export function CartProvider({ children }) {
     }
   }
 
-  function deleteFromCart(id) {
-    const quantity = getProductQuantity(id);
+  function deleteFromCart(title) {
+    const quantity = getProductQuantity(title);
 
     if (quantity == 1) {
-      deleteAll(id);
+      deleteAll(title);
     } else {
       setCartProducts(
         setCartProducts(
           cartProducts.map((product) =>
-            product.id === id
+            product.title === title
               ? { ...product, quantity: product.quantity - 1 }
               : product
           )
@@ -63,10 +63,10 @@ export function CartProvider({ children }) {
     }
   }
 
-  function deleteAll(id) {
+  function deleteAll(title) {
     setCartProducts((cartProducts) =>
       cartProducts.filter((currentProduct) => {
-        return currentProduct.id != id;
+        return currentProduct.title != title;
       })
     );
   }
