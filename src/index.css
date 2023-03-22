@@ -68,3 +68,17 @@ form {
 h2 {
   color: whitesmoke;
 }
+
+.cartBox {
+  border: 3px solid rgb(85, 72, 72);
+  float: right;
+  margin: 5px;
+  width: 300px;
+  background-color: rgb(220, 230, 226);
+}
+
+.cartBox > * {
+  margin: 4px auto;
+  font-size: 1rem;
+  padding: 2px;
+}

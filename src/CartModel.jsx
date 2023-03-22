@@ -8,7 +8,7 @@ function CartModel() {
   const productsCount = cart.items.length;
 
   return (
-    <div>
+    <div className="cartBox">
       {productsCount > 0 ? (
         <>
           <p>Items in your cart:</p>
