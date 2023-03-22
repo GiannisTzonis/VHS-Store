@@ -8,10 +8,6 @@ body {
   box-sizing: border-box;
 }
 
-* {
-  color: black;
-}
-
 .containeru {
   width: 100%;
   background-color: rgb(138, 161, 161);

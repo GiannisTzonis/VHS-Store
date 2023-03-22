@@ -11,17 +11,28 @@ const MovieModel = ({ title, poster_path }) => {
   const product = { title, poster_path };
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.title);
-  console.log(cart.items);
+  // console.log(cart.items);
   //
 
   return (
     <div className="box">
       {productQuantity > 0 ? (
-        <button onClick={() => cart.deleteFromCart(product.title)}>
+        <button
+          onClick={() => {
+            console.log(title, "was removed from the cart");
+            cart.deleteFromCart(product.title);
+          }}
+        >
           Remove
         </button>
       ) : (
-        <button type="button" onClick={() => cart.addOneToCart(product.title)}>
+        <button
+          type="button"
+          onClick={() => {
+            console.log(title, "was added to the cart");
+            cart.addOneToCart(product.title);
+          }}
+        >
           Add
         </button>
       )}
