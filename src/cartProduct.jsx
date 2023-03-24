@@ -10,8 +10,13 @@ function CartProduct(props) {
   return (
     <>
       <h3>{title}</h3>
-      <p>{quantity} total.</p>
-      <button onClick={() => cart.deleteFromCart(title)}>Remove</button>
+      {/* <p>{quantity} total.</p> */}
+      <button
+        className="deleteButton"
+        onClick={() => cart.deleteFromCart(title)}
+      >
+        Remove
+      </button>
       <hr></hr>
     </>
   );
