@@ -1,22 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import MovieModel from "./MovieModel";
 import CartProvider from "./cartContext";
 import CartModel from "./CartModel";
+import handleClick from "./handleClick";
+import NavbarComponent from "./Navbar";
 // import componentDidMount from "./sortVoteAverage";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=b523068f06b70a547946c560d618e2ac";
 const API_SEARCH =
   "https://api.themoviedb.org/3/search/movie?api_key=b523068f06b70a547946c560d618e2ac&query";
-
-// function handleClick() {
-//   fetch("https://run.mocky.io/v3/0366a156-69f7-4f44-bb20-e90dd288833b", {
-//     method: "POST",
-//     mode: "cors",
-//     body: JSON.stringify(jsonData),
-//   });
-// }
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -57,8 +53,27 @@ function App() {
     setQuery(x.target.value);
   };
 
+  //vote
+
+  // const [vote, setVote] = useState(movies)
+
+  // function sortAscending() {
+  //   const { data } = state
+  //   result.sort((a, b) => a - b);
+  // }
+
+  //post req
+  // const handleClick = () => {
+  //   fetch("https://run.mocky.io/v3/0366a156-69f7-4f44-bb20-e90dd288833b", {
+  //     method: "POST",
+  //     mode: "cors",
+  //     body: JSON.stringify(jsonData),
+  //   });
+  // };
+
   return (
     <CartProvider>
+      <NavbarComponent></NavbarComponent>
       {loading ? (
         <>Loading...</>
       ) : (

@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-// import ( moviesArray ) from  "./app.jsx"
 
 export const CartContext = createContext({
   items: [],
