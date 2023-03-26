@@ -1,82 +1,36 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 export const CartContext = createContext({
   items: [],
-  getProductQuantity: () => {},
   addOneToCart: () => {},
   deleteFromCart: () => {},
-  deleteAll: () => {},
 });
 
 export function CartProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
 
-  function getProductQuantity(title) {
-    const quantity = cartProducts.find(
-      (product) => product.title === title
-    )?.quantity;
-
-    if (quantity === undefined) {
-      return 0;
-    }
-    return quantity;
-  }
-
   function addOneToCart(title, id) {
-    const quantity = getProductQuantity(title);
-
-    if (quantity === 0) {
-      setCartProducts([
-        ...cartProducts,
-        {
-          title: title,
-          quantity: 1,
-          id: id,
-        },
-      ]);
-    } else {
-      setCartProducts(
-        cartProducts.map((product) =>
-          product.title === title
-            ? { ...product, quantity: product.quantity + 1 }
-            : product
-        )
-      );
-    }
+    setCartProducts([
+      ...cartProducts,
+      {
+        title: title,
+        id: id,
+      },
+    ]);
   }
 
-  function deleteFromCart(title) {
-    const quantity = getProductQuantity(title);
-
-    if (quantity == 1) {
-      deleteAll(title);
-    } else {
-      setCartProducts(
-        setCartProducts(
-          cartProducts.map((product) =>
-            product.title === title
-              ? { ...product, quantity: product.quantity - 1 }
-              : product
-          )
-        )
-      );
-    }
-  }
-
-  function deleteAll(title) {
-    setCartProducts((cartProducts) =>
+  function deleteFromCart(id) {
+    setCartProducts(
       cartProducts.filter((currentProduct) => {
-        return currentProduct.title != title;
+        return currentProduct.id != id;
       })
     );
   }
 
   const contextValue = {
     items: cartProducts,
-    getProductQuantity,
     addOneToCart,
     deleteFromCart,
-    deleteAll,
   };
 
   return (

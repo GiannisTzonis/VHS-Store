@@ -1,41 +1,34 @@
 import { Button, Navbar, Modal } from "react-bootstrap";
 import { useState, useContext } from "react";
-import { CartContext } from "./cartContext";
-import CartProduct from "./cartProduct";
+import { CartContext } from "../cartContext";
+import CartProduct from "./CartProduct";
+import purchaseMovies from "../methods/purchaseMovies";
 
 function NavbarComponent() {
   const cart = useContext(CartContext);
   const productsCount = cart.items.length;
-
+  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const checkout = async () => {
-    await fetch(
-      "https://run.mocky.io/v3/0366a156-69f7-4f44-bb20-e90dd288833b",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items: cart.items }),
-      }
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        if (response.url) {
-          window.location.assign(response.url); // Forwarding user to Stripe
-        }
-      });
-  };
+  const handleClick = async () => {
+    const jsonData = {
+      data: {
+        movies: cart.items.map((item) => item.id),
+      },
+    };
 
-  // const productsCount = cart.items.reduce(
-  //   (sum, product) => sum + product.quantity,
-  //   0
-  // );
+    try {
+      setLoading(true);
+      await purchaseMovies(jsonData);
+      toastr.success("Movies purchased successfully");
+    } catch (error) {
+      toastr.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -58,18 +51,20 @@ function NavbarComponent() {
                 <CartProduct
                   key={idx}
                   title={currentProduct.title}
-                  quantity={currentProduct.quantity}
+                  id={currentProduct.id}
                 ></CartProduct>
               ))}
 
-              {/* <h1>Total: {cart.getTotalCost().toFixed(2)}</h1> */}
-
-              <Button variant="success" onClick={checkout}>
+              <Button
+                variant="success"
+                onClick={handleClick}
+                disabled={loading}
+              >
                 Purchase items!
               </Button>
             </>
           ) : (
-            <h1>There are no items in your cart!</h1>
+            <span>There are no items in your cart!</span>
           )}
         </Modal.Body>
       </Modal>

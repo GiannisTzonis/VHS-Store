@@ -1,19 +1,16 @@
-import { CartContext } from "./cartContext";
+import { CartContext } from "../cartContext";
 import { useContext } from "react";
 import MovieModel from "./MovieModel.jsx";
 
-function CartProduct(props) {
+function CartProduct({ title, id }) {
   const cart = useContext(CartContext);
-  const title = props.title;
-  const quantity = props.quantity;
 
   return (
     <div className="cartItem">
       <h3>{title}</h3>
-      {/* <p>{quantity} total.</p> */}
       <button
         className="btn-close"
-        onClick={() => cart.deleteFromCart(title)}
+        onClick={() => cart.deleteFromCart(id)}
       ></button>
     </div>
   );
