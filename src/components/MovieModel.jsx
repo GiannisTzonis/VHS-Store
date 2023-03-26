@@ -26,7 +26,7 @@ const MovieModel = ({ title, posterPath, id }) => {
           Add
         </button>
       )}
-      <h1>{title}</h1>
+      <h1 className="movieTitle">{title}</h1>
       <img src={apiRoutes.imageUrl + posterPath}></img>
     </div>
   );

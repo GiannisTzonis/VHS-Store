@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import CartProduct from "./CartProduct";
 import { Button } from "react-bootstrap";
 import toastr from "toastr";
+// import { toastr } from "react-toastr";
 import purchaseMovies from "../methods/purchaseMovies";
 
 function CartModel() {
@@ -21,7 +22,7 @@ function CartModel() {
     try {
       setLoading(true);
       await purchaseMovies(jsonData);
-      toastr.success("Movies purchased successfully");
+      toastr.success("Successful Purchase");
     } catch (error) {
       toastr.error("Something went wrong");
     } finally {
@@ -49,16 +50,16 @@ function CartModel() {
             />
           ))}
 
-          <Button
+          <button
             className="purchaseB"
             onClick={handleClick}
             disabled={loading}
           >
             Purchase {moviesText()}
-          </Button>
+          </button>
         </>
       ) : (
-        <h2 className="cartTitle">There are no items in your cart</h2>
+        <h2 className="cartTitle">There are no movies in your cart.</h2>
       )}
     </div>
   );

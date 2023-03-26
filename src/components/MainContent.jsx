@@ -8,8 +8,10 @@ function MainContent({ movies, handleSort, searchMovie }) {
     <div>
       {movies.length > 0 ? (
         <div className="containeru">
-          <SearchBar searchMovie={searchMovie} />
-          <SortMoviesSelect handleSort={handleSort} />
+          <div className="searchAndSort">
+            <SearchBar searchMovie={searchMovie} />
+            <SortMoviesSelect handleSort={handleSort} />
+          </div>
 
           <CartModel />
 

@@ -14,7 +14,7 @@ function SearchBar({ searchMovie }) {
   };
 
   return (
-    <div>
+    <div className="searchBox">
       <input
         className="searchBar"
         type="search"

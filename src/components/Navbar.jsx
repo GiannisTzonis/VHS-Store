@@ -32,8 +32,9 @@ function NavbarComponent() {
 
   return (
     <>
-      <Navbar expand="sm">
-        <Navbar.Brand className="glitch">VHF Store</Navbar.Brand>
+      <Navbar className="nav" expand="sm">
+        <span className="glitch">VHF Store</span>
+
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button onClick={handleShow}>Cart ({productsCount} Items)</Button>
