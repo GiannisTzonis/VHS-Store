@@ -1,4 +1,4 @@
-import { Button, Container, Navbar, Modal } from "react-bootstrap";
+import { Button, Navbar, Modal } from "react-bootstrap";
 import { useState, useContext } from "react";
 import { CartContext } from "./cartContext";
 import CartProduct from "./cartProduct";
@@ -40,7 +40,7 @@ function NavbarComponent() {
   return (
     <>
       <Navbar expand="sm">
-        <Navbar.Brand href="/">VHF Store</Navbar.Brand>
+        <Navbar.Brand className="glitch">VHF Store</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button onClick={handleShow}>Cart ({productsCount} Items)</Button>

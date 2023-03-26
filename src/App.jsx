@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./App.css";
+import "./mediaQ.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import MovieModel from "./MovieModel";

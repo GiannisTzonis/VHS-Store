@@ -1,0 +1,11 @@
+@media only screen and (max-width: 600px) {
+  .searchBar {
+    width: 80%;
+    line-height: 1.5rem;
+    font-size: 1.4rem;
+  }
+  .grid {
+    width: 100%;
+    display: flex;
+  }
+}
