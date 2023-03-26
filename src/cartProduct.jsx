@@ -8,17 +8,14 @@ function CartProduct(props) {
   const quantity = props.quantity;
 
   return (
-    <>
+    <div className="cartItem">
       <h3>{title}</h3>
       {/* <p>{quantity} total.</p> */}
       <button
-        className="deleteButton"
+        className="btn-close"
         onClick={() => cart.deleteFromCart(title)}
-      >
-        Remove
-      </button>
-      <hr></hr>
-    </>
+      ></button>
+    </div>
   );
 }
 
