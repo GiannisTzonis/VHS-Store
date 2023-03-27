@@ -1,4 +1,4 @@
-VHF Store
+VHS Store
 
 Front End application built with React.
 
