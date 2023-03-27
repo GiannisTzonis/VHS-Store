@@ -1,4 +1,5 @@
 import { Button, Navbar, Modal } from "react-bootstrap";
+import toastr from "toastr";
 import { useState, useContext } from "react";
 import { CartContext } from "../cartContext";
 import CartProduct from "./CartProduct";
@@ -22,7 +23,9 @@ function NavbarComponent() {
     try {
       setLoading(true);
       await purchaseMovies(jsonData);
-      toastr.success("Movies purchased successfully");
+      toastr.success(
+        "Hello, it’s VHF Store. We are sending you a message to inform you that your payment has been successful."
+      );
     } catch (error) {
       toastr.error("Something went wrong");
     } finally {
@@ -32,12 +35,14 @@ function NavbarComponent() {
 
   return (
     <>
-      <Navbar className="nav" expand="sm">
+      <Navbar className="nav">
         <span className="glitch">VHF Store</span>
 
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Button onClick={handleShow}>Cart ({productsCount} Items)</Button>
+        <Navbar.Collapse className="navCart">
+          <Button className="navButton" onClick={handleShow}>
+            Cart: {productsCount} Movies
+          </Button>
         </Navbar.Collapse>
       </Navbar>
       <Modal show={show} onHide={handleClose}>
@@ -47,7 +52,7 @@ function NavbarComponent() {
         <Modal.Body>
           {productsCount > 0 ? (
             <>
-              <p>Items in your cart:</p>
+              <p>{cart.items.length} Movies in your cart:</p>
               {cart.items.map((currentProduct, idx) => (
                 <CartProduct
                   key={idx}
@@ -65,7 +70,7 @@ function NavbarComponent() {
               </Button>
             </>
           ) : (
-            <span>There are no items in your cart!</span>
+            <span>There are no movies in your cart!</span>
           )}
         </Modal.Body>
       </Modal>

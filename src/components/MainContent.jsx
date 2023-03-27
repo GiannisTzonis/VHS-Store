@@ -2,10 +2,11 @@ import CartModel from "./CartModel";
 import MoviesGrid from "./MoviesGrid";
 import SearchBar from "./SearchBar";
 import SortMoviesSelect from "./SortMoviesSelect";
+import { refreshPage } from "../methods/refresh";
 
 function MainContent({ movies, handleSort, searchMovie }) {
   return (
-    <div>
+    <div className="mainC">
       {movies.length > 0 ? (
         <div className="containeru">
           <div className="searchAndSort">
@@ -18,7 +19,13 @@ function MainContent({ movies, handleSort, searchMovie }) {
           <MoviesGrid movies={movies} />
         </div>
       ) : (
-        <h2>No Movies Found</h2>
+        <div className="errorDiv">
+          <h2>No Movies Found</h2>
+          <button className="refreshButton" onClick={refreshPage}>
+            Return
+          </button>
+          <div className="bg"></div>
+        </div>
       )}
     </div>
   );

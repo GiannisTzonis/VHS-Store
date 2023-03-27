@@ -38,10 +38,10 @@ function MainContainer() {
   }, []);
 
   const sortedMovies = useMemo(() => {
-    if (sort === "asc") {
+    if (sort === "Highest Average Vote") {
       return [...movies].sort((a, b) => a.vote_average - b.vote_average);
     }
-    if (sort === "desc") {
+    if (sort === "Lowest Average Vote") {
       return [...movies].sort((a, b) => b.vote_average - a.vote_average);
     }
     return movies;

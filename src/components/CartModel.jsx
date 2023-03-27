@@ -3,9 +3,8 @@ import { CartContext } from "../cartContext";
 import { useState, useContext } from "react";
 import CartProduct from "./CartProduct";
 import { Button } from "react-bootstrap";
-import toastr from "toastr";
-// import { toastr } from "react-toastr";
 import purchaseMovies from "../methods/purchaseMovies";
+import toastr from "toastr";
 
 function CartModel() {
   const cart = useContext(CartContext);
@@ -22,9 +21,11 @@ function CartModel() {
     try {
       setLoading(true);
       await purchaseMovies(jsonData);
-      toastr.success("Successful Purchase");
+      toastr.success(
+        "Hello, it’s VHF Store. We are sending you a message to inform you that your payment has been successful."
+      );
     } catch (error) {
-      toastr.error("Something went wrong");
+      alert("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -50,13 +51,14 @@ function CartModel() {
             />
           ))}
 
-          <button
+          <Button
             className="purchaseB"
+            variant="success"
             onClick={handleClick}
             disabled={loading}
           >
             Purchase {moviesText()}
-          </button>
+          </Button>
         </>
       ) : (
         <h2 className="cartTitle">There are no movies in your cart.</h2>
